@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>प्यार मीटर - Love Meter Magic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff4d6d;
+            --secondary: #ff8fa3;
+            --accent: #ffb3c1;
+            --light: #fff0f3;
+            --dark: #590d22;
+            --text: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Hind', sans-serif;
+            background: linear-gradient(135deg, #fff0f3 0%, #ffccd5 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,218.7C672,224,768,160,864,138.7C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .card h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ffe4e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 77, 109, 0.2);
+        }
+        
+        button {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+        }
+        
+        button i {
+            margin-right: 8px;
+        }
+        
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            background: var(--light);
+            border-radius: 10px;
+            text-align: center;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+        
+        .share-btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .facebook { background-color: #3b5998; }
+        .twitter { background-color: #1da1f2; }
+        .whatsapp { background-color: #25d366; }
+        .pinterest { background-color: #bd081c; }
+        
+        .love-percentage {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .love-message {
+            font-style: italic;
+            margin-top: 10px;
+            color: var(--dark);
+        }
+        
+        .quiz-section {
+            margin: 50px 0;
+        }
+        
+        .quiz-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-family: 'Playfair Display', serif;
+            color: var(--dark);
+            font-size: 2.5rem;
+        }
+        
+        .quiz-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .question {
+            margin-bottom: 20px;
+        }
+        
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        @media (max-width: 600px) {
+            .options {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .option {
+            padding: 15px;
+            background: var(--light);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .option:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        .option.selected {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .quiz-result {
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--light);
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .shayari {
+            font-style: italic;
+            color: var(--dark);
+            line-height: 1.8;
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .horoscope-result {
+            line-height: 1.8;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .heart {
+            position: absolute;
+            color: rgba(255, 77, 109, 0.3);
+            animation: float 8s linear infinite;
+            font-size: 20px;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            background: var(--dark);
+            color: white;
+            border-radius: 15px;
+        }
+        
+        .disclaimer {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 15px;
+        }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-heart"></i> प्यार मीटर</h1>
+            <p class="tagline">अपनी प्रेम अनुकूलता की खोज करें और व्यक्तिगत कुंडली संबंधी जानकारी प्राप्त करें</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="card">
+                <h2>प्यार कैलकुलेटर</h2>
+                <div class="input-group">
+                    <label for="name1"><i class="fas fa-user"></i> पहले व्यक्ति का नाम</label>
+                    <input type="text" id="name1" placeholder="अपना नाम दर्ज करें">
+                </div>
+                <div class="input-group">
+                    <label for="name2"><i class="fas fa-user"></i> दूसरे व्यक्ति का नाम</label>
+                    <input type="text" id="name2" placeholder="अपने साथी का नाम दर्ज करें">
+                </div>
+                <button onclick="calculateLove()"><i class="fas fa-heart"></i> प्यार % की गणना करें</button>
+                
+                <div class="result">
+                    <p>आपका प्यार प्रतिशत यहां दिखाई देगा</p>
+                    <div class="love-percentage" id="love-percentage">0%</div>
+                    <p class="love-message" id="love-message"></p>
+                    
+                    <div class="share-buttons" id="share-buttons" style="display: none;">
+                        <button class="share-btn facebook" onclick="shareOnFacebook()">
+                            <i class="fab fa-facebook-f"></i> Facebook
+                        </button>
+                        <button class="share-btn twitter" onclick="shareOnTwitter()">
+                            <i class="fab fa-twitter"></i> Twitter
+                        </button>
+                        <button class="share-btn whatsapp" onclick="shareOnWhatsApp()">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>प्यार कुंडली बॉट</h2>
+                <div class="input-group">
+                    <label for="birthdate1"><i class="fas fa-calendar"></i> आपकी जन्म तिथि</label>
+                    <input type="date" id="birthdate1">
+                </div>
+                <div class="input-group">
+                    <label for="birthdate2"><i class="fas fa-calendar"></i> साथी की जन्म तिथि</label>
+                    <input type="date" id="birthdate2">
+                </div>
+                <button onclick="getHoroscope()"><i class="fas fa-star"></i> प्यार कुंडली प्राप्त करें</button>
+                
+                <div class="result">
+                    <p>आपकी व्यक्तिगत प्यार कुंडली यहां दिखाई देगी</p>
+                    <div class="horoscope-result" id="horoscope-result"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="quiz-section">
+            <h2 class="quiz-title">अपने प्यार को जानें क्विज</h2>
+            <div class="quiz-container">
+                <div id="quiz-content">
+                    <div class="question">
+                        <div class="question-text" id="question-text">क्विज शुरू करने के लिए नीचे दिए बटन पर क्लिक करें</div>
+                    </div>
+                    <button onclick="startQuiz()"><i class="fas fa-play"></i> क्विज शुरू करें</button>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 प्यार मीटर | अपना आदर्श मेल खोजें</p>
+            <p class="disclaimer">अस्वीकरण: यह वेबसाइट केवल मनोरंजन के उद्देश्यों के लिए है। परिणाम वैज्ञानिक शोध पर आधारित नहीं हैं।</p>
+        </footer>
+    </div>
+
+    <script>
+        // Create floating hearts in the background
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const numberOfHearts = 30;
+            
+            for (let i = 0; i < numberOfHearts; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '<i class="fas fa-heart"></i>';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 10 + 5) + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        // Love Calculator Algorithm
+        function calculateLove() {
+            const name1 = document.getElementById('name1').value;
+            const name2 = document.getElementById('name2').value;
+            
+            if (!name1 || !name2) {
+                alert('कृपया दोनों नाम दर्ज करें');
+                return;
+            }
+            
+            // Simple love calculation algorithm (for entertainment only)
+            const combinedNames = (name1 + name2).toLowerCase().replace(/\s/g, '');
+            let score = 0;
+            
+            for (let i = 0; i < combinedNames.length; i++) {
+                score += combinedNames.charCodeAt(i);
+            }
+            
+            score = score % 101; // Ensure percentage between 0-100
+            
+            // Animate the percentage counter
+            animateValue('love-percentage', 0, score, 1500);
+            
+            // Get interpretation based on score
+            let message = "";
+            if (score < 20) {
+                message = "कम अनुकूलता - लेकिन समय के साथ प्यार बढ़ सकता है!";
+            } else if (score < 50) {
+                message = "मध्यम अनुकूलता - प्रयास से संभावना मौजूद है!";
+            } else if (score < 75) {
+                message = "अच्छी अनुकूलता - प्यार के लिए एक मजबूत आधार!";
+            } else {
+                message = "उत्कृष्ट अनुकूलता - स्वर्ग में बना एक मैच!";
+            }
+            
+            document.getElementById('love-message').textContent = message;
+            document.getElementById('share-buttons').style.display = 'flex';
+        }
+        
+        // Animate value counter
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start) + "%";
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+        
+        // Horoscope Bot Function
+        function getHoroscope() {
+            const birthdate1 = document.getElementById('birthdate1').value;
+            const birthdate2 = document.getElementById('birthdate2').value;
+            
+            if (!birthdate1 || !birthdate2) {
+                alert('कृपया दोनों जन्म तिथियां दर्ज करें');
+                return;
+            }
+            
+            // In a real implementation, you would call your DeepSeek API here
+            // For demonstration, we'll use a placeholder function
+            const horoscopeMessage = generateHoroscopeMessage(birthdate1, birthdate2);
+            
+            document.getElementById('horoscope-result').innerHTML = `
+                <h3>आपकी प्यार कुंडली:</h3>
+                <p>${horoscopeMessage}</p>
+            `;
+        }
+        
+        // Placeholder function for DeepSeek API call
+        function generateHoroscopeMessage(date1, date2) {
+            // This is where you would implement the actual API call to DeepSeek
+            // For now, returning a sample message based on zodiac signs
+            
+            const zodiacSigns = {
+                0: "मकर", 1: "कुंभ", 2: "मीन", 3: "मेष",
+                4: "वृषभ", 5: "मिथुन", 6: "कर्क", 7: "सिंह",
+                8: "कन्या", 9: "तुला", 10: "वृश्चिक", 11: "धनु"
+            };
+            
+            // Simple zodiac calculation based on month
+            const getZodiacSign = (date) => {
+                const month = new Date(date).getMonth();
+                return zodiacSigns[month];
+            };
+            
+            const sign1 = getZodiacSign(date1);
+            const sign2 = getZodiacSign(date2);
+            
+            return `आपके राशि चिन्हों (${sign1} और ${sign2}) के आधार पर, आपके रिश्ते में सद्भाव और समझ की महान क्षमता है। तारे एक मजबूत भावनात्मक संबंध का संकेत देते हैं जो कुछ गहरा अर्थपूर्ण विकसित हो सकता है। आपके बीच संचार स्वाभाविक रूप से बहता है, और आप दोनों रिश्तों में ईमानदारी और प्रतिबद्धता को महत्व देते हैं। आपकी संयुक्त ऊर्जा एक संतुलित साझेदारी बनाती है जहां दोनों समर्थित और सराहना महसूस करते हैं। गुणवत्तापूर्ण समय और साझा अनुभवों के साथ अपने बंधन को पोषित करना याद रखें। खगोलीय संरेखण सुझाव देता है कि यह रिश्ता स्थायी खुशी ला सकता है यदि दोनों साथी एक दूसरे के साथ खुले और कमजोर रहें। प्यार एक यात्रा है जिसके लिए धैर्य और समझ की आवश्यकता होती है - आपकी शुरुआत आशाजनक है!`;
+        }
+        
+        // Social Sharing Functions
+        function shareOnFacebook() {
+            const lovePercent = document.getElementById('love-percentage').innerText;
+            const name1 = document.getElementById('name1').value || 'आप';
+            const name2 = document.getElementById('name2').value || 'आपका साथी';
+            const shareText = `${name1} और ${name2} का प्यार प्रतिशत है ${lovePercent}! अपना प्यार प्रतिशत जानने के लिए प्यार मीटर वेबसाइट पर जाएं।`;
+            const shareUrl = encodeURIComponent(window.location.href);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}&quote=${encodeURIComponent(shareText)}`, '_blank');
+        }
+        
+        function shareOnTwitter() {
+            const lovePercent = document.getElementById('love-percentage').innerText;
+            const name1 = document.getElementById('name1').value || 'आप';
+            const name2 = document.getElementById('name2').value || 'आपका साथी';
+            const shareText = `${name1} और ${name2} का प्यार प्रतिशत है ${lovePercent}! #प्यारमीटर`;
+            const shareUrl = encodeURIComponent(window.location.href);
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${shareUrl}`, '_blank');
+        }
+        
+        function shareOnWhatsApp() {
+            const lovePercent = document.getElementById('love-percentage').innerText;
+            const name1 = document.getElementById('name1').value || 'आप';
+            const name2 = document.getElementById('name2').value || 'आपका साथी';
+            const shareText = `${name1} और ${name2} का प्यार प्रतिशत है ${lovePercent}! अपना प्यार प्रतिशत जानने के लिए इस वेबसाइट पर जाएं: ${window.location.href}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
+        }
+        
+        // Love Quiz Implementation
+        const quizQuestions = [
+            {
+                question: "आपका साथी किस प्रकार की शौक रखता है?",
+                options: ["खेल और साहसिक कार्य", "कला और संगीत", "पढ़ाई और ज्ञान", "सामाजिक कार्य और मदद"]
+            },
+            {
+                question: "आपके साथी की जीवन में सबसे बड़ी प्राथमिकता क्या है?",
+                options: ["परिवार और रिश्ते", "करियर और सफलता", "सीखना और विकास", "सामाजिक बदलाव"]
+            },
+            {
+                question: "आपका साथी अपना खाली समय कैसे बिताना पसंद करता है?",
+                options: ["दोस्तों के साथ", "अकेले या शांतिवापूर्ण गतिविधियों के साथ", "नई चीजें सीखने में", "यात्रा और रोमांच में"]
+            },
+            {
+                question: "आपके साथी का जीवन का लक्ष्य क्या है?",
+                options: ["एक खुशहाल परिवार बनाना", "दुनिया में बदलाव लाना", "व्यक्तिगत विकास और आत्म-साक्षात्कार", "वित्तीय सुरक्षा और आराम"]
+            },
+            {
+                question: "आपके साथी के लिए प्यार में सबसे महत्वपूर्ण क्या है?",
+                options: ["वफादारी और विश्वास", "समझ और सहानुभूति", "रोमांच और रचनात्मकता", "बौद्धिक संगत"]
+            }
+        ];
+        
+        const shayaris = [
+            "तुम्हारी हर एक बात पे होता है ये दिल मेहरबान,\nतुम्हारे सिवा दुनिया में कोई नहीं है मेरी जान।",
+            "तेरे इश्क़ ने बदल दी मेरी दुनिया सारी,\nअब तो बस तुझसे है मेरी हर दुआ यारी।",
+            "तुम्हारी यादों के सहारे जी रहा हूँ मैं,\nतुम्हारे बिना जिंदगी अधूरी है मेरी।",
+            "हर दिन तुमसे प्यार बढ़ता जाता है,\nजैसे फूलों में खुशबू समाता जाता है।",
+            "तुम्हारी मुस्कुराहट है मेरी दुनिया की रौशनी,\nतुम्हारे बिना अधूरी है हर एक कहानी।"
+        ];
+        
+        let currentQuestion = 0;
+        let selectedOptions = [];
+        
+        function startQuiz() {
+            currentQuestion = 0;
+            selectedOptions = [];
+            displayQuestion();
+        }
+        
+        function displayQuestion() {
+            if (currentQuestion >= quizQuestions.length) {
+                showQuizResult();
+                return;
+            }
+            
+            const question = quizQuestions[currentQuestion];
+            let optionsHtml = '';
+            
+            question.options.forEach((option, index) => {
+                optionsHtml += `
+                    <div class="option" onclick="selectOption(${index})">
+                        ${option}
+                    </div>
+                `;
+            });
+            
+            document.getElementById('quiz-content').innerHTML = `
+                <div class="question">
+                    <div class="question-text">${question.question}</div>
+                    <div class="options">${optionsHtml}</div>
+                </div>
+                <div class="quiz-nav">
+                    <button onclick="prevQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}><i class="fas fa-arrow-left"></i> पिछला</button>
+                    <button onclick="nextQuestion()">${currentQuestion === quizQuestions.length - 1 ? 'परिणाम देखें' : 'अगला'} <i class="fas fa-arrow-right"></i></button>
+                </div>
+            `;
+        }
+        
+        function selectOption(optionIndex) {
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+            selectedOptions[currentQuestion] = optionIndex;
+        }
+        
+        function nextQuestion() {
+            if (selectedOptions[currentQuestion] === undefined) {
+                alert('कृपया एक विकल्प चुनें');
+                return;
+            }
+            
+            currentQuestion++;
+            displayQuestion();
+        }
+        
+        function prevQuestion() {
+            currentQuestion--;
+            displayQuestion();
+        }
+        
+        function showQuizResult() {
+            // Simple scoring - just for fun
+            const score = selectedOptions.reduce((sum, option) => sum + option, 0) % shayaris.length;
+            const shayari = shayaris[score];
+            
+            document.getElementById('quiz-content').innerHTML = `
+                <div class="quiz-result">
+                    <h3>आपकी प्रेम क्विज का परिणाम</h3>
+                    <p>आपके और आपके साथी के बीच एक खूबसूरत रिश्ता है!</p>
+                    <div class="shayari">
+                        ${shayari}
+                    </div>
+                    <button onclick="startQuiz()" style="margin-top: 20px;"><i class="fas fa-redo"></i> फिर से खेलें</button>
+                </div>
+            `;
+        }
+        
+        // Initialize the page
+        window.onload = function() {
+            createHearts();
+        };
+    </script>
+</body>
+</html>
