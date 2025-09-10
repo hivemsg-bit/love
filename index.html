@@ -4,25 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>प्यार मीटर - Love Meter Magic</title>
-    
-    <!-- Google AdSense Publisher ID Meta Tag -->
-    <meta name="google-adsense-account" content="ca-pub-7459160768548706">
-    
-    <!-- Google Site Verification Meta Tag (Search Console) -->
-    <meta name="google-site-verification" content="YOUR_SEARCH_CONSOLE_CODE">
-    
-    <!-- Google AdSense Verification Code -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7459160768548706"
-         crossorigin="anonymous"></script>
-    
-    <!-- Alternative: AdSense Site Verification Script -->
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-7459160768548706",
-            enable_page_level_ads: true
-        });
-    </script>
-    
+     crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -212,7 +195,6 @@
             gap: 10px;
             margin-top: 15px;
             justify-content: center;
-            flex-wrap: wrap;
         }
         
         .share-btn {
@@ -225,7 +207,6 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            margin: 5px;
         }
         
         .facebook { background-color: #3b5998; }
@@ -390,31 +371,43 @@
             margin-top: 20px;
         }
         
-        /* AdSense CSS */
-        .adsense-ad {
-            margin: 20px 0;
+        .ad-container {
+            margin: 30px 0;
             text-align: center;
-            padding: 15px;
+            width: 100%;
             background: white;
+            padding: 15px;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .ad-container ins {
+            display: block;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
     <div class="hearts" id="hearts"></div>
     
-    <!-- Verification Test Section (Google Crawler के लिए) -->
-    <div style="display: none;">
-        <p>Google AdSense Verification Test</p>
-        <p>Publisher ID: ca-pub-7459160768548706</p>
-    </div>
-    
     <div class="container">
         <header>
             <h1><i class="fas fa-heart"></i> प्यार मीटर</h1>
             <p class="tagline">अपनी प्रेम अनुकूलता की खोज करें और व्यक्तिगत कुंडली संबंधी जानकारी प्राप्त करें</p>
         </header>
+        
+        <!-- AdSense Ad Unit -->
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-7459160768548706"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
         
         <div class="main-content">
             <div class="card">
@@ -467,6 +460,19 @@
             </div>
         </div>
         
+        <!-- AdSense Ad Unit -->
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-7459160768548706"
+                 data-ad-slot="0987654321"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
         <div class="quiz-section">
             <h2 class="quiz-title">अपने प्यार को जानें क्विज</h2>
             <div class="quiz-container">
@@ -477,6 +483,19 @@
                     <button onclick="startQuiz()"><i class="fas fa-play"></i> क्विज शुरू करें</button>
                 </div>
             </div>
+        </div>
+        
+        <!-- AdSense Ad Unit -->
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-7459160768548706"
+                 data-ad-slot="1122334455"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
         
         <footer>
@@ -567,6 +586,8 @@
                 return;
             }
             
+            // In a real implementation, you would call your DeepSeek API here
+            // For demonstration, we'll use a placeholder function
             const horoscopeMessage = generateHoroscopeMessage(birthdate1, birthdate2);
             
             document.getElementById('horoscope-result').innerHTML = `
@@ -575,13 +596,18 @@
             `;
         }
         
+        // Placeholder function for DeepSeek API call
         function generateHoroscopeMessage(date1, date2) {
+            // This is where you would implement the actual API call to DeepSeek
+            // For now, returning a sample message based on zodiac signs
+            
             const zodiacSigns = {
                 0: "मकर", 1: "कुंभ", 2: "मीन", 3: "मेष",
                 4: "वृषभ", 5: "मिथुन", 6: "कर्क", 7: "सिंह",
                 8: "कन्या", 9: "तुला", 10: "वृश्चिक", 11: "धनु"
             };
             
+            // Simple zodiac calculation based on month
             const getZodiacSign = (date) => {
                 const month = new Date(date).getMonth();
                 return zodiacSigns[month];
@@ -620,7 +646,7 @@
             window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
         }
         
-        // Quiz Functions
+        // Love Quiz Implementation
         const quizQuestions = [
             {
                 question: "आपका साथी किस प्रकार की शौक रखता है?",
@@ -671,9 +697,8 @@
             let optionsHtml = '';
             
             question.options.forEach((option, index) => {
-                const selectedClass = selectedOptions[currentQuestion] === index ? 'selected' : '';
                 optionsHtml += `
-                    <div class="option ${selectedClass}" onclick="selectOption(${index})">
+                    <div class="option" onclick="selectOption(${index})">
                         ${option}
                     </div>
                 `;
@@ -681,24 +706,21 @@
             
             document.getElementById('quiz-content').innerHTML = `
                 <div class="question">
-                    <div class="question-text">प्रश्न ${currentQuestion + 1}: ${question.question}</div>
+                    <div class="question-text">${question.question}</div>
                     <div class="options">${optionsHtml}</div>
                 </div>
                 <div class="quiz-nav">
-                    <button onclick="prevQuestion()" ${currentQuestion === 0 ? 'disabled' : ''} style="background: #ccc; cursor: not-allowed;">
-                        <i class="fas fa-arrow-left"></i> पिछला
-                    </button>
-                    <button onclick="nextQuestion()">
-                        ${currentQuestion === quizQuestions.length - 1 ? 'परिणाम देखें' : 'अगला'} 
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
+                    <button onclick="prevQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}><i class="fas fa-arrow-left"></i> पिछला</button>
+                    <button onclick="nextQuestion()">${currentQuestion === quizQuestions.length - 1 ? 'परिणाम देखें' : 'अगला'} <i class="fas fa-arrow-right"></i></button>
                 </div>
             `;
         }
         
         function selectOption(optionIndex) {
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
             selectedOptions[currentQuestion] = optionIndex;
-            displayQuestion();
         }
         
         function nextQuestion() {
@@ -712,26 +734,23 @@
         }
         
         function prevQuestion() {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                displayQuestion();
-            }
+            currentQuestion--;
+            displayQuestion();
         }
         
         function showQuizResult() {
+            // Simple scoring - just for fun
             const score = selectedOptions.reduce((sum, option) => sum + option, 0) % shayaris.length;
             const shayari = shayaris[score];
             
             document.getElementById('quiz-content').innerHTML = `
                 <div class="quiz-result">
-                    <h3>🎉 आपकी प्रेम क्विज का परिणाम</h3>
+                    <h3>आपकी प्रेम क्विज का परिणाम</h3>
                     <p>आपके और आपके साथी के बीच एक खूबसूरत रिश्ता है!</p>
                     <div class="shayari">
-                        <pre>${shayari}</pre>
+                        ${shayari}
                     </div>
-                    <button onclick="startQuiz()" style="margin-top: 20px; background: var(--primary);">
-                        <i class="fas fa-redo"></i> फिर से खेलें
-                    </button>
+                    <button onclick="startQuiz()" style="margin-top: 20px;"><i class="fas fa-redo"></i> फिर से खेलें</button>
                 </div>
             `;
         }
@@ -739,20 +758,6 @@
         // Initialize the page
         window.onload = function() {
             createHearts();
-            
-            // Log for debugging
-            console.log('Page loaded successfully');
-            console.log('AdSense Client ID: ca-pub-7459160768548706');
-            
-            // Try to initialize AdSense
-            try {
-                if (window.adsbygoogle) {
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                    console.log('AdSense initialized successfully');
-                }
-            } catch (error) {
-                console.log('AdSense initialization error:', error);
-            }
         };
     </script>
 </body>
